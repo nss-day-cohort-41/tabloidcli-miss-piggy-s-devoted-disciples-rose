@@ -6,6 +6,9 @@ namespace TabloidCLI
     {
         static void Main(string[] args)
         {
+
+            
+            //Blog Management,Author Management,Post Management,Tag Management,Search by Tag,Exit
             // MainMenuManager implements the IUserInterfaceManager interface
             IUserInterfaceManager ui = new MainMenuManager();
             while (ui != null)
