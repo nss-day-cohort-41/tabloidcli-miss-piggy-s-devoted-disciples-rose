@@ -46,9 +46,11 @@ namespace TabloidCLI.UserInterfaceManagers
                     {
                         return new AuthorDetailManager(this, _connectionString, author.Id);
                     }
-                case "3":
+                */
+                case "2":
                     Add();
                     return this;
+                    /*
                 case "4":
                     Edit();
                     return this;
@@ -105,24 +107,26 @@ namespace TabloidCLI.UserInterfaceManagers
                 return null;
             }
         }
-
+        */
+        
         private void Add()
         {
-            Console.WriteLine("New Author");
-            Author author = new Author();
+            Console.WriteLine("New Journal Entry");
+            Journal journal = new Journal();
 
-            Console.Write("First Name: ");
-            author.FirstName = Console.ReadLine();
+            Console.Write("Title: ");
+            journal.Title = Console.ReadLine();
 
-            Console.Write("Last Name: ");
-            author.LastName = Console.ReadLine();
+            Console.Write("Content: ");
+            journal.Content = Console.ReadLine();
 
             Console.Write("Bio: ");
-            author.Bio = Console.ReadLine();
+            journal.CreateDateTime = DateTime.Now;
 
-            _authorRepository.Insert(author);
+            _journalRepository.Insert(journal);
         }
 
+        /*
         private void Edit()
         {
             Author authorToEdit = Choose("Which author would you like to edit?");

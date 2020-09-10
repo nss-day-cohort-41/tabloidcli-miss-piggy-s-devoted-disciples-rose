@@ -101,14 +101,14 @@ namespace TabloidCLI
             }
         }
 
-        public void Insert(Author author)
+        public void Insert(Journal journal)
         {
             using (SqlConnection conn = Connection)
             {
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Author (FirstName, LastName, Bio )
+                    cmd.CommandText = @"INSERT INTO Journal (FirstName, LastName, Bio )
                                                      VALUES (@firstName, @lastName, @bio)";
                     cmd.Parameters.AddWithValue("@firstName", author.FirstName);
                     cmd.Parameters.AddWithValue("@lastName", author.LastName);
