@@ -39,8 +39,51 @@ namespace TabloidCLI.Repositories
 
         public List<Blog> GetAll()
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
 
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT Id, Title, URL FROM Blog";
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<Blog> allBlog = new List<Blog>();
+
+                    //reader.Read() will return true as long as there is more data to read
+                    while(reader.Read())
+                    {
+                        //get column positions and values
+
+                        int idColumnPosition = reader.GetOrdinal("Id");
+                        int idValue = reader.GetInt32(idColumnPosition);
+
+                        int titlePosition = reader.GetOrdinal("Title");
+                        string titleValue = reader.GetString(titlePosition);
+
+
+                        int urlPosition = reader.GetOrdinal("Url");
+                        string urlValue = reader.GetString(urlPosition);
+
+                        Blog blog = new Blog
+                        {
+                            Id = idValue,
+                            Title = titleValue,
+                            Url = urlValue
+                        };
+
+                        allBlog.Add(blog);
+                        
+                    }
+
+                    reader.Close();
+
+                    return allBlog;
+
+
+                }
+            }
         }
 
         public Blog Get(int id)

@@ -23,6 +23,7 @@ namespace TabloidCLI.UserInterfaceManagers
         public IUserInterfaceManager Execute()
         {
             Console.WriteLine("Blog Menu");
+            Console.WriteLine(" 1) List Blogs");
             Console.WriteLine(" 3) Add a Blog");
             Console.WriteLine(" 0) Go Back");
             Console.Write("> ");
@@ -31,6 +32,9 @@ namespace TabloidCLI.UserInterfaceManagers
 
             switch (userChoice)
             {
+                case "1":
+                    List();
+                    return this;
                 case "3":
                     Insert();
                     return this;
@@ -57,6 +61,15 @@ namespace TabloidCLI.UserInterfaceManagers
 
             _blogRepository.Insert(blog);
 
+        }
+
+        private void List()
+        {
+            List<Blog> blogs = _blogRepository.GetAll();
+            foreach (Blog blog in blogs)
+            {
+                Console.WriteLine(blog);
+            }
         }
 
 
