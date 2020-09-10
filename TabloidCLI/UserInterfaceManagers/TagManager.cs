@@ -49,10 +49,21 @@ namespace TabloidCLI.UserInterfaceManagers
             throw new NotImplementedException();
         }
 
-        private void Add()
+        /*private void Add()
         {
-            throw new NotImplementedException();
-        }
+            Console.WriteLine("New Tag");
+            Tag tag = new Tag();
+
+            Console.Write("Id: ");
+            tag.Id = Console.ReadLine();
+
+            Console.Write("Name: ");
+            tag.Name = Console.ReadLine();
+
+            
+
+            _tagRepository.Insert(tag);
+        }*/
 
         private void Edit()
         {
