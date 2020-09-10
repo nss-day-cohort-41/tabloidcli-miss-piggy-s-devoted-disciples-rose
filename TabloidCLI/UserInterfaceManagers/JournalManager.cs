@@ -120,7 +120,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write("Content: ");
             journal.Content = Console.ReadLine();
 
-            Console.Write("Bio: ");
+            Console.Write("Date: ");
             journal.CreateDateTime = DateTime.Now;
 
             _journalRepository.Insert(journal);
