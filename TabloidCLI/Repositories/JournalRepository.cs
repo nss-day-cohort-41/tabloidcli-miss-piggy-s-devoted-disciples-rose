@@ -108,11 +108,11 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Journal (FirstName, LastName, Bio )
-                                                     VALUES (@firstName, @lastName, @bio)";
-                    cmd.Parameters.AddWithValue("@firstName", author.FirstName);
-                    cmd.Parameters.AddWithValue("@lastName", author.LastName);
-                    cmd.Parameters.AddWithValue("@bio", author.Bio);
+                    cmd.CommandText = @"INSERT INTO Journal (Title, Content, CreateDateTime)
+                                                     VALUES (@title, @content, @createDateTime)";
+                    cmd.Parameters.AddWithValue("@firstName", journal.Title);
+                    cmd.Parameters.AddWithValue("@lastName", journal.Content);
+                    cmd.Parameters.AddWithValue("@bio", journal.CreateDateTime);
 
                     cmd.ExecuteNonQuery();
                 }
