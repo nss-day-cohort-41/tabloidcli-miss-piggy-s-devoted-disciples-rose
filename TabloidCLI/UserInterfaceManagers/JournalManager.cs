@@ -120,9 +120,9 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write("Content: ");
             journal.Content = Console.ReadLine();
 
-            Console.Write("Date: ");
+            Console.Write($"Current Date & Time : {DateTime.Now} ");
             journal.CreateDateTime = DateTime.Now;
-
+            Console.WriteLine();
             _journalRepository.Insert(journal);
         }
 
