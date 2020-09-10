@@ -51,13 +51,13 @@ namespace TabloidCLI.UserInterfaceManagers
                     Add();
                     return this;
                     /*
-                case "4":
+                case "3":
                     Edit();
                     return this;
-                case "5":
+                */
+                case "4":
                     Remove();
                     return this;
-                */
                 case "0":
                     return _parentUI;
 
@@ -76,22 +76,21 @@ namespace TabloidCLI.UserInterfaceManagers
                 Console.WriteLine(journal);
             }
         }
-        /*
-        private Author Choose(string prompt = null)
+        private Journal Choose(string prompt = null)
         {
             if (prompt == null)
             {
-                prompt = "Please choose an Author:";
+                prompt = "Please choose an Journal:";
             }
 
             Console.WriteLine(prompt);
 
-            List<Author> authors = _journalRepository.GetAll();
+            List<Journal> journals = _journalRepository.GetAll();
 
-            for (int i = 0; i < authors.Count; i++)
+            for (int i = 0; i < journals.Count; i++)
             {
-                Author author = authors[i];
-                Console.WriteLine($" {i + 1}) {author.FullName}");
+                Journal journal = journals[i];
+                Console.WriteLine($" {i + 1}) {journal.Title}");
             }
             Console.Write("> ");
 
@@ -99,7 +98,7 @@ namespace TabloidCLI.UserInterfaceManagers
             try
             {
                 int choice = int.Parse(input);
-                return authors[choice - 1];
+                return journals[choice - 1];
             }
             catch (Exception ex)
             {
@@ -107,8 +106,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 return null;
             }
         }
-        */
-        
+       
         private void Add()
         {
             Console.WriteLine("New Journal Entry");
@@ -123,6 +121,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write($"Current Date & Time : {DateTime.Now} ");
             journal.CreateDateTime = DateTime.Now;
             Console.WriteLine();
+            Console.WriteLine("-------------------------");
             _journalRepository.Insert(journal);
         }
 
@@ -158,14 +157,14 @@ namespace TabloidCLI.UserInterfaceManagers
             _authorRepository.Update(authorToEdit);
         }
 
+        */
         private void Remove()
         {
-            Author authorToDelete = Choose("Which author would you like to remove?");
-            if (authorToDelete != null)
+            Journal journalToDelete = Choose("Which journal entry would you like to remove?");
+            if (journalToDelete != null)
             {
-                _authorRepository.Delete(authorToDelete.Id);
+                _journalRepository.Delete(journalToDelete.Id);
             }
         }
-        */
     }
 }
