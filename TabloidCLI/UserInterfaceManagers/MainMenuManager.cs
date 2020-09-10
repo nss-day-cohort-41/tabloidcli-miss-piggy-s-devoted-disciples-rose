@@ -9,6 +9,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine("Welcome to Miss Piggy's Devoted Disciples Blog Post");//TL
             Console.WriteLine("Main Menu");
 
             Console.WriteLine(" 1) Journal Management");
