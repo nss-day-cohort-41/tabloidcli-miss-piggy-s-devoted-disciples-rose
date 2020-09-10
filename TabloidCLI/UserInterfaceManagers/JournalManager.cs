@@ -50,11 +50,11 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "2":
                     Add();
                     return this;
-                    /*
+                    
                 case "3":
                     Edit();
                     return this;
-                */
+                
                 case "4":
                     Remove();
                     return this;
@@ -125,39 +125,33 @@ namespace TabloidCLI.UserInterfaceManagers
             _journalRepository.Insert(journal);
         }
 
-        /*
+        
         private void Edit()
         {
-            Author authorToEdit = Choose("Which author would you like to edit?");
-            if (authorToEdit == null)
+            Journal journalToEdit = Choose("Which Journal Entry would you like to edit?");
+            if (journalToEdit == null)
             {
                 return;
             }
 
             Console.WriteLine();
-            Console.Write("New first name (blank to leave unchanged: ");
-            string firstName = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(firstName))
+            Console.Write("New Title (blank to leave unchanged: ");
+            string title = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(title))
             {
-                authorToEdit.FirstName = firstName;
+                journalToEdit.Title = title;
             }
-            Console.Write("New last name (blank to leave unchanged: ");
-            string lastName = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(lastName))
+            Console.Write("New Content (blank to leave unchanged: ");
+            string content = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(content))
             {
-                authorToEdit.LastName = lastName;
-            }
-            Console.Write("New bio (blank to leave unchanged: ");
-            string bio = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(bio))
-            {
-                authorToEdit.Bio = bio;
+                journalToEdit.Content = content;
             }
 
-            _authorRepository.Update(authorToEdit);
+            _journalRepository.Update(journalToEdit);
         }
 
-        */
+  
         private void Remove()
         {
             Journal journalToDelete = Choose("Which journal entry would you like to remove?");
