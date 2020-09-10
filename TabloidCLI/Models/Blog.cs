@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
+using TabloidCLI.Models;
 
 namespace TabloidCLI.Models
 {
