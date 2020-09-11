@@ -46,16 +46,18 @@ namespace TabloidCLI.UserInterfaceManagers
                     {
                         return new AuthorDetailManager(this, _connectionString, author.Id);
                     }
-                case "3":
+                */
+                case "2":
                     Add();
                     return this;
-                case "4":
+                    
+                case "3":
                     Edit();
                     return this;
-                case "5":
+                
+                case "4":
                     Remove();
                     return this;
-                */
                 case "0":
                     return _parentUI;
 
@@ -74,22 +76,21 @@ namespace TabloidCLI.UserInterfaceManagers
                 Console.WriteLine(journal);
             }
         }
-        /*
-        private Author Choose(string prompt = null)
+        private Journal Choose(string prompt = null)
         {
             if (prompt == null)
             {
-                prompt = "Please choose an Author:";
+                prompt = "Please choose an Journal:";
             }
 
             Console.WriteLine(prompt);
 
-            List<Author> authors = _journalRepository.GetAll();
+            List<Journal> journals = _journalRepository.GetAll();
 
-            for (int i = 0; i < authors.Count; i++)
+            for (int i = 0; i < journals.Count; i++)
             {
-                Author author = authors[i];
-                Console.WriteLine($" {i + 1}) {author.FullName}");
+                Journal journal = journals[i];
+                Console.WriteLine($" {i + 1}) {journal.Title}");
             }
             Console.Write("> ");
 
@@ -97,7 +98,7 @@ namespace TabloidCLI.UserInterfaceManagers
             try
             {
                 int choice = int.Parse(input);
-                return authors[choice - 1];
+                return journals[choice - 1];
             }
             catch (Exception ex)
             {
@@ -105,63 +106,59 @@ namespace TabloidCLI.UserInterfaceManagers
                 return null;
             }
         }
-
+       
         private void Add()
         {
-            Console.WriteLine("New Author");
-            Author author = new Author();
+            Console.WriteLine("New Journal Entry");
+            Journal journal = new Journal();
 
-            Console.Write("First Name: ");
-            author.FirstName = Console.ReadLine();
+            Console.Write("Title: ");
+            journal.Title = Console.ReadLine();
 
-            Console.Write("Last Name: ");
-            author.LastName = Console.ReadLine();
+            Console.Write("Content: ");
+            journal.Content = Console.ReadLine();
 
-            Console.Write("Bio: ");
-            author.Bio = Console.ReadLine();
-
-            _authorRepository.Insert(author);
+            Console.Write($"Current Date & Time : {DateTime.Now} ");
+            journal.CreateDateTime = DateTime.Now;
+            Console.WriteLine();
+            Console.WriteLine("-------------------------");
+            _journalRepository.Insert(journal);
         }
 
+        
         private void Edit()
         {
-            Author authorToEdit = Choose("Which author would you like to edit?");
-            if (authorToEdit == null)
+            Journal journalToEdit = Choose("Which Journal Entry would you like to edit?");
+            if (journalToEdit == null)
             {
                 return;
             }
 
             Console.WriteLine();
-            Console.Write("New first name (blank to leave unchanged: ");
-            string firstName = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(firstName))
+            Console.Write("New Title (blank to leave unchanged: ");
+            string title = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(title))
             {
-                authorToEdit.FirstName = firstName;
+                journalToEdit.Title = title;
             }
-            Console.Write("New last name (blank to leave unchanged: ");
-            string lastName = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(lastName))
+            Console.Write("New Content (blank to leave unchanged: ");
+            string content = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(content))
             {
-                authorToEdit.LastName = lastName;
-            }
-            Console.Write("New bio (blank to leave unchanged: ");
-            string bio = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(bio))
-            {
-                authorToEdit.Bio = bio;
+                journalToEdit.Content = content;
             }
 
-            _authorRepository.Update(authorToEdit);
+            _journalRepository.Update(journalToEdit);
         }
 
+  
         private void Remove()
         {
-            Author authorToDelete = Choose("Which author would you like to remove?");
-            if (authorToDelete != null)
+            Journal journalToDelete = Choose("Which journal entry would you like to remove?");
+            if (journalToDelete != null)
             {
-                _authorRepository.Delete(authorToDelete.Id);
+                _journalRepository.Delete(journalToDelete.Id);
             }
         }
-        */
     }
 }
