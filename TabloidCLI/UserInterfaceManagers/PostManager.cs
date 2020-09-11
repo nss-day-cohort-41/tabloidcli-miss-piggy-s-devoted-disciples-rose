@@ -24,7 +24,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
-            Console.WriteLine("Author Menu");
+            Console.WriteLine("Post Menu");
             Console.WriteLine(" 1) List Posts");
             Console.WriteLine(" 2) Post Details");
             Console.WriteLine(" 3) Add Post");
@@ -120,14 +120,48 @@ namespace TabloidCLI.UserInterfaceManagers
 
             post.PublishDateTime = DateTime.Now;
 
+            // Lists All authors with their ID
+            // Then parses user input from string to integer
+            // Author object is assigned an author using parsed response
             Console.WriteLine("Choose an Author: ");
+            List<Author> authors = _authorRepository.GetAll();
+            foreach (Author author in authors)
+            {
+                Console.WriteLine($"{author.Id}. {author.FullName}");
+            }
             string authorInput = Console.ReadLine();
             int authorId = Int32.Parse(authorInput);
-            post.Author = _authorRepository.GetById(authorId);
+            
+            
+            if (authorId == 0  || authorId > authors.Count)
+            {
+                Console.WriteLine("Invalid selection. Choose an Author: ");
+                authors = _authorRepository.GetAll();
+                foreach (Author author in authors)
+                {
+                    Console.WriteLine($"{author.Id}. {author.FullName}");
+                }
+                authorInput = Console.ReadLine();
+                authorId = Int32.Parse(authorInput);
+            }
+            else
+            {
+                post.Author = _authorRepository.GetById(authorId);
+            }
 
-            Console.Write("Blog: ");
+            // Lists All blogs with their ID
+            // Then parses user input from string to integer
+            // Author object is assigned a blog using parsed response
+            /*
+            Console.Write("Choose a Blog: ");
+            List<Blog> blogs = _blogRepository.GetAll();
+            foreach (Blog blog in blogs)
+            {
+                Console.WriteLine($"{blog.Id}. {blog.Title}");
+            }
             string blogInput = Console.ReadLine();
             int blogId = Int32.Parse(blogInput);
+            */
             //post.Blog = _blogRepository.Get(blogId);
 
             _postRepository.Insert(post);
@@ -148,14 +182,44 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 postToEdit.Title = title;
             }
+
             Console.Write("New URL (blank to leave unchanged: ");
             string url = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(url))
             {
                 postToEdit.Url = url;
             }
+
             DateTime dateTime = DateTime.Now;
             postToEdit.PublishDateTime = dateTime;
+
+            // EDIT AUTHOR ASSIGMENT
+            List<Author> authors = _authorRepository.GetAll();
+            foreach (Author author in authors)
+            {
+                Console.WriteLine($"{author.Id}. {author.FullName}");
+            }
+            Console.Write("New Author (blank to leave unchanged: ");
+            string authorInput = Console.ReadLine();
+            int authorId = Int32.Parse(authorInput);
+            if (!string.IsNullOrWhiteSpace(authorInput))
+            {
+                postToEdit.Author = _authorRepository.GetById(authorId);
+            }
+
+            // EDIT BLOG ASSIGNMENT
+            List<Blog> blogs = _blogRepository.GetAll();
+            foreach (Blog blog in blogs)
+            {
+                Console.WriteLine($"{blog.Id}. {blog.Title}");
+            }
+            Console.Write("New Blog (blank to leave unchanged: ");
+            string blogInput = Console.ReadLine();
+            int blogId = Int32.Parse(blogInput);
+            if (!string.IsNullOrWhiteSpace(blogInput))
+            {
+                postToEdit.Blog = _blogRepository.Get(blogId);
+            }
 
             _postRepository.Update(postToEdit);
         }
