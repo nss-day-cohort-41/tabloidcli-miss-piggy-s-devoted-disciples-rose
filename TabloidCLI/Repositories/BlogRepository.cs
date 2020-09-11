@@ -88,19 +88,72 @@ namespace TabloidCLI.Repositories
 
         public Blog Get(int id)
         {
-            throw new NotImplementedException();
+            using(SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using(SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT id, title, url FROM Blog WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    Blog blog = null;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while(reader.Read())
+                    {
+                        if(blog == null)
+                        {
+                            blog = new Blog
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Title = reader.GetString(reader.GetOrdinal("Title")),
+                                Url = reader.GetString(reader.GetOrdinal("url"))
+
+                            };
+                        }
+                    }
+
+                    reader.Close();
+                    return blog;
+
+                }
+            }
 
         }
 
 
         public void Update(Blog blog)
         {
-            throw new NotImplementedException();
+            using(SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using(SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Blog SET Title = @title, Url = @url WHERE id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", blog.Id);
+                    cmd.Parameters.AddWithValue("@title", blog.Title);
+                    cmd.Parameters.AddWithValue("@url", blog.Url);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+
+            using(SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using(SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM Blog WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
 
