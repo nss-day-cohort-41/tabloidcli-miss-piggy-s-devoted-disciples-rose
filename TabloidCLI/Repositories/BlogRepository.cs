@@ -39,25 +39,121 @@ namespace TabloidCLI.Repositories
 
         public List<Blog> GetAll()
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
 
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT Id, Title, URL FROM Blog";
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<Blog> allBlog = new List<Blog>();
+
+                    //reader.Read() will return true as long as there is more data to read
+                    while(reader.Read())
+                    {
+                        //get column positions and values
+
+                        int idColumnPosition = reader.GetOrdinal("Id");
+                        int idValue = reader.GetInt32(idColumnPosition);
+
+                        int titlePosition = reader.GetOrdinal("Title");
+                        string titleValue = reader.GetString(titlePosition);
+
+
+                        int urlPosition = reader.GetOrdinal("Url");
+                        string urlValue = reader.GetString(urlPosition);
+
+                        Blog blog = new Blog
+                        {
+                            Id = idValue,
+                            Title = titleValue,
+                            Url = urlValue
+                        };
+
+                        allBlog.Add(blog);
+                        
+                    }
+
+                    reader.Close();
+
+                    return allBlog;
+
+
+                }
+            }
         }
 
         public Blog Get(int id)
         {
-            throw new NotImplementedException();
+            using(SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using(SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT id, title, url FROM Blog WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    Blog blog = null;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while(reader.Read())
+                    {
+                        if(blog == null)
+                        {
+                            blog = new Blog
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Title = reader.GetString(reader.GetOrdinal("Title")),
+                                Url = reader.GetString(reader.GetOrdinal("url"))
+
+                            };
+                        }
+                    }
+
+                    reader.Close();
+                    return blog;
+
+                }
+            }
 
         }
 
 
         public void Update(Blog blog)
         {
-            throw new NotImplementedException();
+            using(SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using(SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Blog SET Title = @title, Url = @url WHERE id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", blog.Id);
+                    cmd.Parameters.AddWithValue("@title", blog.Title);
+                    cmd.Parameters.AddWithValue("@url", blog.Url);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+
+            using(SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using(SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM Blog WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
 
