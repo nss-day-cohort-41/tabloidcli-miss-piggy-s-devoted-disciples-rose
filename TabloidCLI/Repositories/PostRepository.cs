@@ -90,12 +90,12 @@ namespace TabloidCLI
                                     Id = reader.GetInt32(reader.GetOrdinal("AuthorId")),
                                     FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                                     LastName = reader.GetString(reader.GetOrdinal("LastName"))
-                                }
-                                /*Blog = new Blog()
+                                },
+                                Blog = new Blog()
                                 {
                                     Id = reader.GetInt32(reader.GetOrdinal("BlogId")),
                                     Title = reader.GetString(reader.GetOrdinal("Title")),
-                                }*/
+                                }
                             };
                         }
 
@@ -187,8 +187,16 @@ namespace TabloidCLI
                     cmd.Parameters.AddWithValue("@title", post.Title);
                     cmd.Parameters.AddWithValue("@url", post.Url);
                     cmd.Parameters.AddWithValue("@publishDateTime", post.PublishDateTime);
-                    cmd.Parameters.AddWithValue("@authorId", post.Author);
-                    /*cmd.Parameters.AddWithValue("@blogId", post.Blog.Id);*/
+                    cmd.Parameters.AddWithValue("@authorId", post.Author.Id);
+                    cmd.Parameters.AddWithValue("@blogId", post.Blog.Id);
+                   
+                    int id = (int)cmd.ExecuteScalar();
+                    //The cmd.ExecuteScalar method does two things: First, it executes the SQL command against the database. 
+                    //Then it looks at the first thing that the database sends back (in our case this is just the Id it created for the room) and returns it.
+                    // ....room.id declared here now that the result has been returned (similar to seeing the result when using .then statements
+                    //with the rresult returned we have the Id that the SQL server assigned
+                    post.Id = id;
+
 
                 }
             }
