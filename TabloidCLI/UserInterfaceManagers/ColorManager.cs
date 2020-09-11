@@ -65,7 +65,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "0":
                     return _parentUI;
                 default:
-                    Console.WriteLine("Invalid Selection");
+                    Console.WriteLine($"Invalid Selection, {choice} is not a number provided here. Please choose from a number listed above");
                     return this;
             }
         }
