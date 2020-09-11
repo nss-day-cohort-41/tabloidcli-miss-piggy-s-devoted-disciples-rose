@@ -119,7 +119,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write("Author: ");
             string authorInput = Console.ReadLine();
             int authorId = Int32.Parse(authorInput);
-            //post.Author = AuthorRepository.Get(authorId);
+            post.Author = AuthorRepository.Get(authorId);
 
             Console.Write("Blog: ");
             string blogInput = Console.ReadLine();
