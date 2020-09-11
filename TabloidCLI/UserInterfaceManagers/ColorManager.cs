@@ -4,6 +4,7 @@ using System.Text;
 
 namespace TabloidCLI.UserInterfaceManagers
 {
+    //Created by Brett Stoudt
     class ColorManager : IUserInterfaceManager
     {
         private readonly IUserInterfaceManager _parentUI;
