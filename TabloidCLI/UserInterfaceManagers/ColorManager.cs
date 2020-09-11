@@ -18,10 +18,12 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             Console.WriteLine("Color Menu");
             Console.WriteLine(" 1) DarkMagenta / White 'Miss Piggys Favorit`");
-            Console.WriteLine(" 2) White / Black");
-            Console.WriteLine(" 3) Grey / Black");
-            Console.WriteLine(" 4) Cyan / Black");
-            Console.WriteLine(" 5) White / Dark Red");
+            Console.WriteLine(" 2) White Background / Black Text");
+            Console.WriteLine(" 3) Grey Background / Black Text");
+            Console.WriteLine(" 4) Cyan Background/ Black Text");
+            Console.WriteLine(" 5) White Background/ Dark Red Text");
+            Console.WriteLine(" 9) Black Background / White Text 'Original'");
+
             Console.WriteLine(" 0) Go Back");
 
             Console.Write("> ");
@@ -52,6 +54,11 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "5":
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Clear();
+                    return Execute();
+                case "9":
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.Clear();
                     return Execute();
 
