@@ -45,6 +45,37 @@ namespace TabloidCLI
             }
         }
 
+        public Author GetById(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT FirstName, LastName, Bio FROM Author WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    Author author = null;
+
+                    if (reader.Read())
+                    {
+                        author = new Author
+                        {
+                            Id = id,
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                            Bio = reader.GetString(reader.GetOrdinal("Bio")),
+                        };
+                    }
+
+                    reader.Close();
+
+                    return author;
+                }
+            }
+        }
+
         public Author Get(int id)
         {
             using (SqlConnection conn = Connection)
