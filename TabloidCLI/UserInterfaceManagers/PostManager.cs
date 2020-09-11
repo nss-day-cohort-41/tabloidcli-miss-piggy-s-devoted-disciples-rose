@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TabloidCLI.Models;
+using TabloidCLI.Repositories;
 
 namespace TabloidCLI.UserInterfaceManagers
 {
@@ -21,10 +22,11 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             Console.WriteLine("Author Menu");
             Console.WriteLine(" 1) List Posts");
-            Console.WriteLine(" 2) Add Post");
-            Console.WriteLine(" 3) Edit Post");
-            Console.WriteLine(" 4) Remove Post");
-            Console.WriteLine(" 5) Note Management");
+            Console.WriteLine(" 2) Post Details");
+            Console.WriteLine(" 3) Add Post");
+            Console.WriteLine(" 4) Edit Post");
+            Console.WriteLine(" 5) Remove Post");
+            Console.WriteLine(" 6) Note Management");
             Console.WriteLine(" 0) Return to Main Menu");
 
             Console.Write("> ");
@@ -109,11 +111,20 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write("Title: ");
             post.Title = Console.ReadLine();
 
-            Console.Write("Last Name: ");
+            Console.Write("URL: ");
             post.Url = Console.ReadLine();
 
-            Console.Write("Bio: ");
             post.PublishDateTime = DateTime.Now;
+
+            Console.Write("Author: ");
+            string authorInput = Console.ReadLine();
+            int authorId = Int32.Parse(authorInput);
+            //post.Author = AuthorRepository.Get(authorId);
+
+            Console.Write("Blog: ");
+            string blogInput = Console.ReadLine();
+            int blogId = Int32.Parse(blogInput);
+            //post.Blog = BlogRepository.Get(blogId);
 
             _postRepository.Insert(post);
         }
