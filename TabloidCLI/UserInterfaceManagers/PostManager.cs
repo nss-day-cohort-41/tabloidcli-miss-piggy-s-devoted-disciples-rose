@@ -146,13 +146,13 @@ namespace TabloidCLI.UserInterfaceManagers
             }
             else
             {
-                post.Author = _authorRepository.GetById(authorId);
+                post.Author = _authorRepository.Get(authorId);
             }
 
             // Lists All blogs with their ID
             // Then parses user input from string to integer
             // Author object is assigned a blog using parsed response
-            /*
+            
             Console.Write("Choose a Blog: ");
             List<Blog> blogs = _blogRepository.GetAll();
             foreach (Blog blog in blogs)
@@ -161,8 +161,8 @@ namespace TabloidCLI.UserInterfaceManagers
             }
             string blogInput = Console.ReadLine();
             int blogId = Int32.Parse(blogInput);
-            */
-            //post.Blog = _blogRepository.Get(blogId);
+            
+            post.Blog = _blogRepository.Get(blogId);
 
             _postRepository.Insert(post);
         }
