@@ -9,12 +9,16 @@ namespace TabloidCLI.UserInterfaceManagers
     {
         private readonly IUserInterfaceManager _parentUI;
         private PostRepository _postRepository;
+        private AuthorRepository _authorRepository;
+        private BlogRepository _blogRepository;
         private string _connectionString;
 
         public PostManager(IUserInterfaceManager parentUI, string connectionString)
         {
             _parentUI = parentUI;
             _postRepository = new PostRepository(connectionString);
+            _authorRepository = new AuthorRepository(connectionString);
+            _blogRepository = new BlogRepository(connectionString);
             _connectionString = connectionString;
         }
 
@@ -116,15 +120,15 @@ namespace TabloidCLI.UserInterfaceManagers
 
             post.PublishDateTime = DateTime.Now;
 
-            Console.Write("Author: ");
+            Console.WriteLine("Choose an Author: ");
             string authorInput = Console.ReadLine();
             int authorId = Int32.Parse(authorInput);
-            post.Author = AuthorRepository.Get(authorId);
+            post.Author = _authorRepository.GetById(authorId);
 
             Console.Write("Blog: ");
             string blogInput = Console.ReadLine();
             int blogId = Int32.Parse(blogInput);
-            //post.Blog = BlogRepository.Get(blogId);
+            //post.Blog = _blogRepository.Get(blogId);
 
             _postRepository.Insert(post);
         }

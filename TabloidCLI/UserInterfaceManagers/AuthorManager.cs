@@ -10,6 +10,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private AuthorRepository _authorRepository;
         private string _connectionString;
 
+
         public AuthorManager(IUserInterfaceManager parentUI, string connectionString)
         {
             _parentUI = parentUI;
