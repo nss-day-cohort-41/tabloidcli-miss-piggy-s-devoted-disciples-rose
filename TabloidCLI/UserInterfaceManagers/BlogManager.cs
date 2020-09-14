@@ -22,6 +22,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine();
             Console.WriteLine("Blog Menu");
             Console.WriteLine(" 1) List Blogs");
             Console.WriteLine(" 2) Blog Details");
@@ -84,6 +85,8 @@ namespace TabloidCLI.UserInterfaceManagers
         private void List()
         {
             List<Blog> blogs = _blogRepository.GetAll();
+            Console.WriteLine();
+            Console.WriteLine("All Blog Entries:");
             foreach (Blog blog in blogs)
             {
                 Console.WriteLine(blog);
@@ -94,6 +97,7 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             if (prompt == null)
             {
+                Console.WriteLine();
                 prompt = "Please choose an Author:";
             }
             Console.WriteLine(prompt);
@@ -108,6 +112,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write("> ");
 
             string input = Console.ReadLine();
+            Console.WriteLine();
             try
             {
                 int choice = int.Parse(input);
