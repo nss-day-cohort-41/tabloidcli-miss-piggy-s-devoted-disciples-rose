@@ -38,7 +38,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     Console.WriteLine("Good bye");
                     return null;
                 default:
-                    Console.WriteLine("Invalid Selection");
+                    Console.WriteLine("Invalid Selection, please choose a number listed above");
                     return this;
             }
         }
