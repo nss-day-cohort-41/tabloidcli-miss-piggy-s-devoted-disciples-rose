@@ -3,19 +3,18 @@
 ## The Tabloid Proof of Concept
 
 Our new business will create a software product to allow people save info about favorite blog posts, authors and blogs.
-
 In order to test the new business idea, we'll create a [Proof of Concept (POC)](https://en.wikipedia.org/wiki/Proof_of_concept#Software_development). This POC will be a simplified implementation of the idea that will be used to test the business idea to ensure that customers would find it valuable, and also to allow the team to get a handle on the concept. After we complete the POC we will use it to evaluate our business idea and determine if we need to pivot (change direction) toward another idea.
-
 For our POC, we will build a command line app in C# and save our data in SQL Server.
 
 ## Getting Started
 
 ### Setup
 1. Clone and enter the project directory
-2. SampleJSON database information available below
-3. npm required JSON.package dependancies
-4. ```npm start```
-5. ```json-server -p 8088 -w database.json```
+2. Open Visual Studio 
+3. From the start menu open the project Solution File
+4. From the File menu -> open file -> TabliodCLI.SQL
+5. Run the script to create a database on your local server / machine.
+6. From Debugger menu open Start Debugger or hit "F5" to access the application.
 
 ### User Experience
 1. Once Command Line Application is started you are presented with a list of options
@@ -28,7 +27,9 @@ For our POC, we will build a command line app in C# and save our data in SQL Ser
 	-Change Color Scheme
 	-Exit
 2. Choose a number that respresents the area you would like to access.
-3. Within each area you will have access to Add, Delete, Edit, and view details.
+3. Within each Journal, Bloog, Author, Post, Tag area you will have access to Add, Delete, Edit, and view details.
+4.Within Color Scheme you are able to change the color scheme for your console application.
+
 #### Example of accessing Journal Managment
 > ADD JOURNAL ENTRY
 from journal menu type "2" and enter to add a journal entry
@@ -51,13 +52,13 @@ from journal menu type "1" and enter to view list of journal entries without the
 Exit type "0" hit "enter"
 
 ### Technologies Used:
-Visual Studio
-CSharp
-SQL Server
--- ADO.NET
+Visual Studio<br>
+CSharp<br>
+SQL Server<br>
+ADO.NET<br>
 
 ### Authors:
-> Tasha Lane
-> Chad Jones
-> Brett Stoudt
-> Gavin Swofford
+> Tasha Lane<br>
+> Chad Jones<br>
+> Brett Stoudt<br>
+> Gavin Swofford<br>
