@@ -177,6 +177,33 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
+                    cmd.CommandText = @"DELETE PostTag FROM PostTag LEFT JOIN Post ON Post.id = PostTag.PostId WHERE Post.AuthorId = @Id";
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+
+                    cmd.ExecuteNonQuery();
+                    
+                }
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE Post FROM Post WHERE Post.AuthorId = @Id";
+                    cmd.Parameters.AddWithValue("@Id", id);
+                 
+
+                    cmd.ExecuteNonQuery();
+                }
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE AuthorTag FROM AuthorTag WHERE AuthorTag.AuthorId = @Id";
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+
+                    cmd.ExecuteNonQuery();
+                
+                }
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                   
                     cmd.CommandText = @"DELETE FROM Author WHERE id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
 

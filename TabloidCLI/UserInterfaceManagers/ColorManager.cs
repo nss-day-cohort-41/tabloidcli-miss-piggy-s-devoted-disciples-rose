@@ -16,6 +16,7 @@ namespace TabloidCLI.UserInterfaceManagers
         }
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine();
             Console.WriteLine("Color Menu");
             Console.WriteLine(" 1) DarkMagenta / White 'Miss Piggys Favorit`");
             Console.WriteLine(" 2) White Background / Black Text");

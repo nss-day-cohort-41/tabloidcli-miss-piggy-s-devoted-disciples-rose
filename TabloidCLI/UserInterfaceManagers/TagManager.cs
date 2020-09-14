@@ -21,6 +21,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine();
             Console.WriteLine("Tag Menu");
             Console.WriteLine(" 1) List Tags");
             Console.WriteLine(" 2) Add Tag");
@@ -56,6 +57,7 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             if (prompt == null)
             {
+                Console.WriteLine();
                 prompt = "Please choose a Tag:";
             }
 
@@ -71,6 +73,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write("> ");
 
             string input = Console.ReadLine();
+            Console.WriteLine();
             try
             {
                 int choice = int.Parse(input);
@@ -79,6 +82,7 @@ namespace TabloidCLI.UserInterfaceManagers
             catch (Exception ex)
             {
                 Console.WriteLine("Invalid Selection");
+                Console.WriteLine();
                 return null;
             }
         }
@@ -87,6 +91,7 @@ namespace TabloidCLI.UserInterfaceManagers
         {
 
             List<Tag> allTags = _tagRepository.GetAll();
+            Console.WriteLine();
             Console.WriteLine($"TagID\tTag Name");
             foreach (Tag tag in allTags)
             {
@@ -100,6 +105,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Add()
         {
+            Console.WriteLine();
             Console.WriteLine("Please add a Tag");
             Console.WriteLine("Tag Name?  (ENTER to cancel)");
 
@@ -117,14 +123,14 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Edit()
         {
+            Console.WriteLine();
             Tag tagToEdit = Choose("Which tag would you like to edit?");
             if (tagToEdit == null)
             {
                 return;
             }
 
-            Console.WriteLine();
-            Console.Write("New name (blank to leave unchanged: ");
+            Console.Write("New name (blank to leave unchanged): ");
             string name = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(name))
             {

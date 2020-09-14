@@ -29,7 +29,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(" 1) View");
             Console.WriteLine(" 2) Add Tag");
             Console.WriteLine(" 3) Remove Tag");
-            Console.WriteLine(" 4) Note Management");
+            /*Console.WriteLine(" 4) Note Management");*/
             Console.WriteLine(" 0) Return");
 
             Console.Write("> ");
@@ -59,6 +59,8 @@ namespace TabloidCLI.UserInterfaceManagers
        private void View()
         {
             Post post = _postRepository.Get(_postId);
+            Console.WriteLine();
+            Console.WriteLine("Post Details:");
             Console.WriteLine($"Title: {post.Title}");
             Console.WriteLine($"URL: {post.Url}");
             Console.WriteLine($"Publish Date: {post.PublishDateTime}");
@@ -85,7 +87,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private void AddTag()
         {
             Post post = _postRepository.Get(_postId);
-
+            Console.WriteLine();
             Console.WriteLine($"Which tag would you like to add to {post.Title}?");
             List<Tag> tags = _tagRepository.GetAll();
 
@@ -95,8 +97,8 @@ namespace TabloidCLI.UserInterfaceManagers
                 Console.WriteLine($" {i + 1}) {tag.Name}");
             }
             Console.Write("> ");
-
             string input = Console.ReadLine();
+            Console.WriteLine();
             try
             {
                 int choice = int.Parse(input);
@@ -112,7 +114,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private void RemoveTag()
         {
             Post post = _postRepository.Get(_postId);
-
+            Console.WriteLine();
             Console.WriteLine($"Which tag would you like to remove from {post.Title}?");
             List<Tag> tags = post.Tags;
 
@@ -122,8 +124,8 @@ namespace TabloidCLI.UserInterfaceManagers
                 Console.WriteLine($" {i + 1}) {tag.Name}");
             }
             Console.Write("> ");
-
             string input = Console.ReadLine();
+            Console.WriteLine();
             try
             {
                 int choice = int.Parse(input);
