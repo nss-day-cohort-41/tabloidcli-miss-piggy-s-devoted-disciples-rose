@@ -24,6 +24,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine();
             Console.WriteLine("Post Menu");
             Console.WriteLine(" 1) List Posts");
             Console.WriteLine(" 2) Post Details");
@@ -35,6 +36,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
             Console.Write("> ");
             string choice = Console.ReadLine();
+            Console.WriteLine();
             switch (choice)
             {
                 case "1":
@@ -70,6 +72,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private void List()
         {
             List<Post> posts = _postRepository.GetAll();
+            Console.WriteLine("All Posts:");
             foreach (Post post in posts)
             {
                 Console.WriteLine(post);
@@ -93,8 +96,8 @@ namespace TabloidCLI.UserInterfaceManagers
                 Console.WriteLine($" {i + 1}) {post.Title}");
             }
             Console.Write("> ");
-
             string input = Console.ReadLine();
+            Console.WriteLine();
             try
             {
                 int choice = int.Parse(input);
@@ -102,6 +105,7 @@ namespace TabloidCLI.UserInterfaceManagers
             }
             catch (Exception ex)
             {
+                Console.WriteLine();
                 Console.WriteLine("Invalid Selection");
                 return null;
             }
@@ -110,11 +114,12 @@ namespace TabloidCLI.UserInterfaceManagers
         private void Add()
         {
             Console.WriteLine("New Post");
+            Console.WriteLine("------------------");
+            Console.WriteLine();
             Post post = new Post();
 
             Console.Write("Title: ");
             post.Title = Console.ReadLine();
-
             Console.Write("URL: ");
             post.Url = Console.ReadLine();
 
@@ -134,13 +139,13 @@ namespace TabloidCLI.UserInterfaceManagers
             
             
                 post.Author = _authorRepository.Get(authorId);
-            
+
 
             // Lists All blogs with their ID
             // Then parses user input from string to integer
             // Author object is assigned a blog using parsed response
-            
-            Console.Write("Choose a Blog: ");
+            Console.WriteLine();
+            Console.WriteLine("Choose a Blog: ");
             List<Blog> blogs = _blogRepository.GetAll();
             foreach (Blog blog in blogs)
             {

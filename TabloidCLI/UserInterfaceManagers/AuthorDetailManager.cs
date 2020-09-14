@@ -25,6 +25,7 @@ namespace TabloidCLI.UserInterfaceManagers
         public IUserInterfaceManager Execute()
         {
             Author author = _authorRepository.Get(_authorId);
+            Console.WriteLine();
             Console.WriteLine($"{author.FullName} Details");
             Console.WriteLine(" 1) View");
             Console.WriteLine(" 2) View Blog Posts");
@@ -59,6 +60,8 @@ namespace TabloidCLI.UserInterfaceManagers
         private void View()
         {
             Author author = _authorRepository.Get(_authorId);
+            Console.WriteLine();
+            Console.WriteLine("Author Details:");
             Console.WriteLine($"Name: {author.FullName}");
             Console.WriteLine($"Bio: {author.Bio}");
             Console.WriteLine("Tags:");
@@ -66,23 +69,23 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 Console.WriteLine(" " + tag);
             }
-            Console.WriteLine();
         }
 
         private void ViewBlogPosts()
         {
             List<Post> posts = _postRepository.GetByAuthor(_authorId);
+            Console.WriteLine();
+            Console.WriteLine("All Blog Posts: ");
             foreach (Post post in posts)
             {
                 Console.WriteLine(post);
             }
-            Console.WriteLine();
         }
 
         private void AddTag()
         {
             Author author = _authorRepository.Get(_authorId);
-
+            Console.WriteLine();
             Console.WriteLine($"Which tag would you like to add to {author.FullName}?");
             List<Tag> tags = _tagRepository.GetAll();
 
@@ -109,7 +112,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private void RemoveTag()
         {
             Author author = _authorRepository.Get(_authorId);
-
+            Console.WriteLine();
             Console.WriteLine($"Which tag would you like to remove from {author.FullName}?");
             List<Tag> tags = author.Tags;
 

@@ -21,6 +21,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine();
             Console.WriteLine("Journal Menu");
             Console.WriteLine(" 1) List Entries");
             Console.WriteLine(" 2) Add Entry");
@@ -71,6 +72,8 @@ namespace TabloidCLI.UserInterfaceManagers
         private void List()
         {
             List<Journal> journals = _journalRepository.GetAll();
+            Console.WriteLine();
+            Console.WriteLine("All Journal Entries:");
             foreach (Journal journal in journals)
             {
                 Console.WriteLine(journal);
@@ -95,6 +98,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write("> ");
 
             string input = Console.ReadLine();
+            Console.WriteLine();
             try
             {
                 int choice = int.Parse(input);
@@ -134,14 +138,14 @@ namespace TabloidCLI.UserInterfaceManagers
                 return;
             }
 
-            Console.WriteLine();
-            Console.Write("New Title (blank to leave unchanged: ");
+            
+            Console.Write("New Title (blank to leave unchanged): ");
             string title = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(title))
             {
                 journalToEdit.Title = title;
             }
-            Console.Write("New Content (blank to leave unchanged: ");
+            Console.Write("New Content (blank to leave unchanged): ");
             string content = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(content))
             {
@@ -154,9 +158,11 @@ namespace TabloidCLI.UserInterfaceManagers
   
         private void Remove()
         {
+            Console.WriteLine();
             Journal journalToDelete = Choose("Which journal entry would you like to remove?");
             if (journalToDelete != null)
             {
+                Console.WriteLine($"{journalToDelete.Title} Deleted");
                 _journalRepository.Delete(journalToDelete.Id);
             }
         }
