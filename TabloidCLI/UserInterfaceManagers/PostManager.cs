@@ -136,10 +136,7 @@ namespace TabloidCLI.UserInterfaceManagers
             }
             string authorInput = Console.ReadLine();
             int authorId = Int32.Parse(authorInput);
-            
-            
-                post.Author = _authorRepository.Get(authorId);
-
+            post.Author = _authorRepository.Get(authorId);
 
             // Lists All blogs with their ID
             // Then parses user input from string to integer

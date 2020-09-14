@@ -59,7 +59,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "0":
                     return _parentUI;
                 default:
-                    Console.WriteLine("Invalid Selection");
+                    Console.WriteLine($"Invalid Selection, {choice} was not a number provided");
                     return this;
             }
         }
@@ -102,7 +102,7 @@ namespace TabloidCLI.UserInterfaceManagers
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Invalid Selection");
+                Console.WriteLine($"Invalid Selection, {input} was not a number provided");
                 return null;
             }
         }
@@ -162,7 +162,24 @@ namespace TabloidCLI.UserInterfaceManagers
             Author authorToDelete = Choose("Which author would you like to remove?");
             if (authorToDelete != null)
             {
-                _authorRepository.Delete(authorToDelete.Id);
+                Console.WriteLine("Deleting this Author will also delete their posts and related information.");
+                Console.WriteLine("Do you still wish to continue?");
+                Console.WriteLine(" 1) Yes, Delete Author and all related content");
+                Console.WriteLine(" 0) No, go back to author menu");
+                Console.Write("> ");
+                string choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "1":
+                        _authorRepository.Delete(authorToDelete.Id);
+                        break;
+                        
+                    case "0":
+                        break;
+                    default:
+                        Console.WriteLine($"Invalid Selection, {choice} was not a number provided");
+                        break;
+                }
             }
         }
     }

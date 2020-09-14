@@ -7,17 +7,21 @@ using TabloidCLI.Repositories;
 namespace TabloidCLI
 {
     //Created by Brett Stoudt
-    //remove IRepository if i am not using get by id?....
-    // removed from public class ", IRepository<Journal>"
     public class JournalRepository : DatabaseConnector, IRepository<Journal>
     {
+        //
         public JournalRepository(string connectionString) : base(connectionString) { }
 
+
+        //ALL JOURNALS
         public List<Journal> GetAll()
         {
+            //SETUP CONNECTION TO SQL USING ADO.NET
             using (SqlConnection conn = Connection)
             {
+                //OPEN CONNECTION
                 conn.Open();
+                //CREATE A SINGLE COMMAND TO SEND TO SQL SERVER, JOURNAL TABLE
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT id,
@@ -26,8 +30,11 @@ namespace TabloidCLI
                                                CreateDateTime
                                           FROM Journal";
 
+                    //CREATE LIST FOR JOURNALS TO BE RETURNED TO
                     List<Journal> journals = new List<Journal>();
 
+                    //EXECUTES COMMAND ABOVE AND IF RESULTS COME BACK IT READS THE RESPONSE (QUERY) AND CREATES A NEW JOURNAL OBJECT TO PLACE IN THE LIST
+                   // MUST CLOSE THIS READER METHOD ONCE RESPONSE TO ADD TO DATABASE HAS BEEN COMPLETED
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
@@ -51,7 +58,8 @@ namespace TabloidCLI
         
        
         
-
+        //PLACES DATA IN TABLE
+        //DOES NOT REQUIRE A QUERY IN THE CMD EXECUTE SINCE WE DO NOT HAVE ANY DATA RELATIONSHIPS WITH THIS TABLE
         public void Insert(Journal journal)
         {
             using (SqlConnection conn = Connection)
@@ -64,12 +72,14 @@ namespace TabloidCLI
                     cmd.Parameters.AddWithValue("@title", journal.Title);
                     cmd.Parameters.AddWithValue("@content", journal.Content);
                     cmd.Parameters.AddWithValue("@createDateTime", journal.CreateDateTime);
-
+                   
+                    //NO RESPONSE BACK, NOT A QUERY
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
+        //UPDATE JOURNAL, NON QUERY EXECUTE
         public void Update(Journal journal)
         {
             using (SqlConnection conn = Connection)
@@ -108,7 +118,7 @@ namespace TabloidCLI
             }
         }
 
-        
+        //NOT USED YET, BUT REQUIRED IN IREPOSITORY AS A SHARED METHOD
         public Journal Get(int id)
         {
             throw new NotImplementedException();

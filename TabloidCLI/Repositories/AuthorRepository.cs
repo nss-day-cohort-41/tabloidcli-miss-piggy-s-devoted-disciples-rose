@@ -205,12 +205,10 @@ namespace TabloidCLI
                 {
                    
                     cmd.CommandText = @"DELETE FROM Author WHERE id = @id";
-                    cmd.Parameters.AddWithValue("@Id", id);
-
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     cmd.ExecuteNonQuery();
                 }
-
             }
         }
 

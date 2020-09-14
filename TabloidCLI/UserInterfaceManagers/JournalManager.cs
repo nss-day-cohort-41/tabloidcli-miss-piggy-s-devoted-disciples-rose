@@ -6,14 +6,20 @@ namespace TabloidCLI.UserInterfaceManagers
 {
     //Created by Brett Stoudt
 
+    //EXECUTE METHOD ADDED TO CLASS USING IUserInterfaceManager
     public class JournalManager : IUserInterfaceManager
     {
+        //set private to avoid malicious acts
+        //executer protocal for all User Inteface managers linked the parentUI manager
         private readonly IUserInterfaceManager _parentUI;
+        // sql commands for Journals
         private JournalRepository _journalRepository;
+        //sql server address
         private string _connectionString;
 
         public JournalManager(IUserInterfaceManager parentUI, string connectionString)
         {
+            //place private fields into public property for application to share access without sharing origin code of field
             _parentUI = parentUI;
             _journalRepository = new JournalRepository(connectionString);
             _connectionString = connectionString;
@@ -79,6 +85,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 Console.WriteLine(journal);
             }
         }
+        //creates a numbered list to use as reference for user when enumerating through the results of the response list  "Journals"
         private Journal Choose(string prompt = null)
         {
             if (prompt == null)
@@ -98,7 +105,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write("> ");
 
             string input = Console.ReadLine();
-            Console.WriteLine();
+            //VERIFY INPUT IS A NUMBER
             try
             {
                 int choice = int.Parse(input);
@@ -106,11 +113,12 @@ namespace TabloidCLI.UserInterfaceManagers
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Invalid Selection");
+                Console.WriteLine($"Invalid Selection, {input} is not a number provided here. Please choose from a number listed above");
                 return null;
             }
         }
        
+        //ADD NEW JOURNAL ENTRY - TITLE , CONTENT, CURRENT DATE AND TIME
         private void Add()
         {
             Console.WriteLine("New Journal Entry");
@@ -129,7 +137,8 @@ namespace TabloidCLI.UserInterfaceManagers
             _journalRepository.Insert(journal);
         }
 
-        
+        //EDIT JOURNAL - SET TITLE AND CONTENT
+        // DATE AND TIME DO NOT CHANGE
         private void Edit()
         {
             Journal journalToEdit = Choose("Which Journal Entry would you like to edit?");
@@ -156,14 +165,16 @@ namespace TabloidCLI.UserInterfaceManagers
         }
 
   
+        //DELETE JOURNAL ENTRY
         private void Remove()
         {
             Console.WriteLine();
             Journal journalToDelete = Choose("Which journal entry would you like to remove?");
             if (journalToDelete != null)
             {
-                Console.WriteLine($"{journalToDelete.Title} Deleted");
+                string title = journalToDelete.Title;
                 _journalRepository.Delete(journalToDelete.Id);
+                Console.WriteLine($"Thank you, Journal titled '{title}' has been deleted");
             }
         }
     }
