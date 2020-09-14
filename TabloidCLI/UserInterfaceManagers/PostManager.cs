@@ -133,21 +133,8 @@ namespace TabloidCLI.UserInterfaceManagers
             int authorId = Int32.Parse(authorInput);
             
             
-            if (authorId == 0  || authorId > authors.Count)
-            {
-                Console.WriteLine("Invalid selection. Choose an Author: ");
-                authors = _authorRepository.GetAll();
-                foreach (Author author in authors)
-                {
-                    Console.WriteLine($"{author.Id}. {author.FullName}");
-                }
-                authorInput = Console.ReadLine();
-                authorId = Int32.Parse(authorInput);
-            }
-            else
-            {
                 post.Author = _authorRepository.Get(authorId);
-            }
+            
 
             // Lists All blogs with their ID
             // Then parses user input from string to integer
